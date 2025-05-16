@@ -1,11 +1,14 @@
 宝贝寻亲服务系统（Child Reunion Service System）
+
 [构建状态] Build Passing
+
 [许可证] MIT License
+
 [语言] Java 1.8+, Spring Boot 2.7+, Hadoop 3.x, Hive 2.x, MySQL 5.7
 
 项目简介
+
 近年来，随着社会流动性增强与人口规模扩大，儿童失踪、拐卖等问题频发，传统寻亲手段信息分散、效率低下，难以满足现实需求。本系统综合运用 Hadoop、Hive、Spring Boot 等主流技术，搭建起一个数据驱动的智能寻亲服务平台。
-![image](https://github.com/user-attachments/assets/2e1ecfc2-f7f6-4a8f-882a-d1005b371824)
 
 系统主要涵盖三类用户角色：
 - 寻亲者：填写亲人信息，发起寻亲请求；
@@ -45,16 +48,8 @@ ECharts 实现数据展示大屏
 IDEA、Navicat、Hadoop环境
 
 项目结构
-baby-search-system/
-├── backend/             # Spring Boot 后端项目
-│   ├── controller/
-│   ├── service/
-│   ├── dao/
-│   └── entity/
-├── frontend/            # 前端页面（HTML/JS/CSS）
-├── data/                # Hive 数据处理脚本与样例数据
-├── docs/                # 项目文档与可视化设计
-└── README.md
+
+![image](https://github.com/user-attachments/assets/2e1ecfc2-f7f6-4a8f-882a-d1005b371824)
 
 快速启动
 环境依赖：
