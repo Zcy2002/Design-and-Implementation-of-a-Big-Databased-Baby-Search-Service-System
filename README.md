@@ -1,4 +1,4 @@
-宝贝寻亲服务系统（Child Search Service System）
+宝贝寻亲服务系统（Baby Search Service System）
 
 [构建状态] Build Passing
 
