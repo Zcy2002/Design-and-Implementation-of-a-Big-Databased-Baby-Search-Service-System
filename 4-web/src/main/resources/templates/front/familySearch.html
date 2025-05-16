@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:include="front/common/header::title"></head>
+</head>
+<body>
+
+<th:block th:replace="front/common/banner::banner"></th:block>
+
+<th:block th:replace="front/common/nav::nav"></th:block>
+
+<div style="max-width: 1000px; margin: 10px auto 0;">
+    <form id="familySearchRegister">
+        <div class="mb-3">
+            <label for="category" class="form-label">类别</label>
+            <select class="form-select" id="category">
+                <option selected>请选择寻亲类别</option>
+                <option value="宝贝寻家">宝贝寻家</option>
+                <option value="家寻宝贝">家寻宝贝</option>
+                <option value="流浪乞讨">流浪乞讨</option>
+                <option value="其他寻人">其他寻人</option>
+
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">姓名</label>
+            <input type="text" class="form-control" id="name" placeholder="请输入姓名" required>
+        </div>
+        <div class="mb-3">
+            <label for="sex" class="form-label">性别</label>
+            <select class="form-select" id="sex">
+                <option selected>请选择性别</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="birthday" class="form-label">生日</label>
+            <input type="date" class="form-control" id="birthday" placeholder="请输入生日" required>
+        </div>
+        <div class="mb-3">
+            <label for="misstime" class="form-label">失联时间</label>
+            <input type="date" class="form-control" id="misstime" placeholder="请输入失联时间" required>
+        </div>
+        <div class="mb-3">
+            <label for="missDecadeStr" class="form-label">失联年代</label>
+            <input type="text" class="form-control" id="missDecadeStr" placeholder="可不填" required>
+        </div>
+        <div class="mb-3">
+            <label for="missAgeStr" class="form-label">失联年龄</label>
+            <input type="text" class="form-control" id="missAgeStr" placeholder="请输入失联年龄" required>
+        </div>
+        <div class="mb-3">
+            <label for="height" class="form-label">身高</label>
+            <input type="text" class="form-control" id="height" placeholder="请输入身高" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="locationprovince" class="form-label">失联省份</label>
+            <select class="form-control" id="locationprovince" required>
+                <option value="">请选择失联省份</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="placeprovince" class="form-label">所在地省份</label>
+            <select class="form-control" id="placeprovince" required>
+                <option value="">请选择所在地省份</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="feature" class="form-label">特征</label>
+            <input type="text" class="form-control" id="feature" placeholder="请输入特征" required>
+        </div>
+        <div class="mb-3">
+            <label for="notes" class="form-label">备注</label>
+            <input type="text" class="form-control" id="notes" placeholder="请输入备注">
+        </div>
+        <div class="mb-3">
+            <label for="volunteer" class="form-label">志愿者</label>
+            <input type="text" class="form-control" id="volunteer" placeholder="请输入志愿者昵称">
+        </div>
+        <button type="button" class="btn btn-primary">提交</button>
+    </form>
+
+</div>
+
+<th:block th:replace="front/common/foot-script::script"></th:block>
+
+<script>
+    $(document).ready(function () {
+        // 给提交按钮绑定点击事件
+        $('#familySearchRegister button.btn-primary').click(function () {
+
+            // 获取表单数据
+            var category = $('#familySearchRegister #category').val();
+            var id = $('#familySearchRegister #id').val();
+            var name = $('#familySearchRegister #name').val();
+            var sex = $('#familySearchRegister #sex').val();
+            var birthday = $('#familySearchRegister #birthday').val();
+            var missDecadeStr = $('#familySearchRegister #missDecadeStr').val();
+            var missAgeStr = $('#familySearchRegister #missAgeStr').val();
+            var height = $('#familySearchRegister #height').val();
+            var misstime = $('#familySearchRegister #misstime').val();
+            var locationprovince = $('#familySearchRegister #locationprovince').val();
+            var placeprovince = $('#familySearchRegister #placeprovince').val();
+            var feature = $('#familySearchRegister #feature').val();
+            var notes = $('#familySearchRegister #notes').val();
+            var volunteer = $('#familySearchRegister #volunteer').val();
+
+            // 非空判断
+            if (!category || !name || !sex || !birthday ||  !missAgeStr || !height || !misstime || !locationprovince || !placeprovince || !feature || !notes || !volunteer) {
+                alert("字段不能为空！");
+                return;
+            }
+
+            // 构造要提交的数据
+            var formData = {
+                category: category,
+                name: name,
+                sex: sex,
+                birthday: birthday,
+                missDecadeStr: missDecadeStr,
+                missAgeStr: missAgeStr,
+                height: height,
+                misstime: misstime,
+                locationprovince: locationprovince,
+                placeprovince: placeprovince,
+                feature: feature,
+                notes: notes,
+                volunteer: volunteer,
+            };
+
+            // 使用 AJAX 提交数据
+            $.ajax({
+                type: "POST",
+                url: "/root/addMissinfo",
+                data: JSON.stringify(formData),
+                contentType: "application/json",
+                success: function (res) {
+                    if (res.code == 200) {
+                        alert("添加成功!");
+                    }else {
+                        alert("添加失败!");
+                    }
+                },
+                error: function () {
+                    alert("服务器错误!")
+                }
+            });
+        });
+
+
+        // 加载省份数据
+        $.ajax({
+            url: '/static/api/provinces.json',
+            type: 'get',
+            success: function(data) {
+                // 渲染下拉列表
+                var locationprovince = $('#locationprovince');
+                var placeprovince = $('#placeprovince');
+                $.each(data, function(index, province) {
+                    locationprovince.append('<option value="' + province.name + '">' + province.name + '</option>');
+                    placeprovince.append('<option value="' + province.name + '">' + province.name + '</option>');
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:include="commom::title('首页')"></head>
+    <style>
+        .top-panel {
+            border: 1px solid #eceff9;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .top-panel > .layui-card-body{
+            height: 60px;
+        }
+        .top-panel-number{
+            line-height:60px;
+            font-size: 30px;
+            border-right:1px solid #eceff9;
+        }
+        .top-panel-tips{
+            line-height:30px;
+            font-size: 12px
+        }
+    </style>
+</head>
+<body>
+<div class="layuimini-main">
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md12">
+            <div class="layui-card top-panel">
+                <div class="layui-card-header top-panel-number" style="color: red;">欢迎使用宝贝寻亲服务系统</div>
+                <!--<div class="layui-card-header top-panel-number">系统当前时间</div>-->
+                <div class="layui-card-body">
+                    <div class="layui-row ">
+                        <div class="top-panel-number" id="datetime"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="layui-row layui-col-space15">
+        <!--
+        <div class="layui-col-xs12 layui-col-md9">
+            <div id="echarts-records" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+        </div>
+
+        <div class="layui-col-xs12 layui-col-md3">
+            <div id="echarts-pies" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+        </div>
+        -->
+    </div>
+
+
+
+</div>
+
+<script th:src="@{/static/lib/layui-v2.5.5/layui.js}" charset="utf-8"></script>
+<script th:src="@{/static/js/lay-config.js(v=1.0.4)}" charset="utf-8"></script>
+<script>
+    setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 1000);
+    layui.use(['layer', 'echarts'], function () {
+        const $ = layui.jquery,
+            layer = layui.layer,
+            echarts = layui.echarts;
+
+
+        var echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
+
+
+        echartsPies.setOption(optionPies);
+
+        // echarts 窗口缩放自适应
+        window.onresize = function () {
+            echartsRecords.resize();
+        }
+
+    });
+</script>
+</body>
+</html>

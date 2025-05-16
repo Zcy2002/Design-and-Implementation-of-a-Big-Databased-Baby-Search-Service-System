@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/travel?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.jdbc.Driver
+
+# Mybatis
+mybatis:
+  type-aliases-package: com.iflytek.ylao.root.pojo, com.iflytek.ylao.volunteer.pojo, com.iflytek.ylao.usr.pojo, com.iflytek.ylao.missinfo.pojo
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+

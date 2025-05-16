@@ -1,0 +1,12 @@
+{
+    "RECORDS": [
+        {
+            "sex": "女",
+            "missing_count": "27193"
+        },
+        {
+            "sex": "男",
+            "missing_count": "15362"
+        }
+    ]
+}

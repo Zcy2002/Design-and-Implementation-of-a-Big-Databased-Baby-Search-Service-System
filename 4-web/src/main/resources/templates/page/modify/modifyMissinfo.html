@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <head th:include="commom::title('修改寻亲信息')"></head>
+  <style>
+    body {
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+<div class="layui-form layui-form-pane">
+  <div class="layui-form-item" >
+    <label class="layui-form-label required">类别</label>
+    <div class="layui-input-block">
+      <input type="text" name="category"  lay-verify="required" placeholder="请输入走失类别" th:value="${missinfo.category}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" >
+    <label class="layui-form-label required" >ID</label>
+    <div class="layui-input-block">
+      <input type="text" name="id" lay-verify="required" placeholder="请输入信息id" th:value="${missinfo.id}" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">姓名</label>
+    <div class="layui-input-block">
+      <input type="text" name="name" lay-verify="required" placeholder="请输入姓名" th:value="${missinfo.name}" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">性别</label>
+    <div class="layui-input-block">
+      <input type="text" name="sex" lay-verify="required" placeholder="请输入性别" th:value="${missinfo.sex}" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item" >
+    <label class="layui-form-label required">出生日期</label>
+    <div class="layui-input-block">
+      <input type="text" name="birthday" lay-verify="required" placeholder="请输入出生日期"  th:value="${missinfo.birthday}" class="layui-input">
+      <input type="hidden" name="id" th:value="${missinfo.id}"/>
+    </div>
+  </div>
+
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">身高</label>
+    <div class="layui-input-block">
+      <input type="text" name="height" lay-verify="required" placeholder="请输入身高" th:value="${missinfo.height}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">走失时间</label>
+    <div class="layui-input-block">
+      <input type="text" name="misstime" lay-verify="required" placeholder="请输入走失时间" th:value="${missinfo.misstime}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">走失时间所属年代</label>
+    <div class="layui-input-block">
+      <input type="text" name="missDecadeStr" lay-verify="required" placeholder="请输入走失时间所属年代" th:value="${missinfo.missDecadeStr}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">寻找时年龄</label>
+    <div class="layui-input-block">
+      <input type="text" name="missAgeStr" lay-verify="required" placeholder="请输入寻找时年龄" th:value="${missinfo.missAgeStr}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">出生所在省份</label>
+    <div class="layui-input-block">
+      <input type="text" name="locationprovince" lay-verify="required" placeholder="请输入出生所在省份" th:value="${missinfo.locationprovince}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">走失时所在省份</label>
+    <div class="layui-input-block">
+      <input type="text" name="placeprovince" lay-verify="required" placeholder="请输入走失时所在省份" th:value="${missinfo.placeprovince}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">特征</label>
+    <div class="layui-input-block">
+      <input type="text" name="feature" lay-verify="required" placeholder="请输入特征" th:value="${missinfo.feature}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">备注</label>
+    <div class="layui-input-block">
+      <input type="text" name="notes" lay-verify="required" placeholder="请输入备注" th:value="${missinfo.notes}" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item"  pane>
+    <label class="layui-form-label required">志愿者昵称</label>
+    <div class="layui-input-block">
+      <input type="text" name="volunteer" lay-verify="required" placeholder="请输入志愿者昵称" th:value="${missinfo.volunteer}" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <div class="layui-input-block" >
+      <button class="layui-btn layui-btn-normal" style="width: 80%"  lay-submit lay-filter="addBtn">确认修改</button>
+    </div>
+  </div>
+</div>
+<script th:src="@{/static/lib/layui-v2.5.5/layui.js}" charset="utf-8"></script>
+<script>
+  layui.use(['form','layer'], function () {
+    const form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+
+    form.on('submit(addBtn)', function (data) {
+      $.ajax({
+        url:'/root/modifyMissinfo',
+        data:data.field,
+        dataType:'json',
+        type:'post',
+        success:function (data) {
+          if (data.code==200){
+            layer.msg(data.msg,{icon:1});
+          }else{
+            layer.msg(data.msg,{icon:2});
+          }
+          setTimeout(function () {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            window.parent.location.reload();
+          }, 1000);
+        }
+      })
+      return false;
+    });
+
+  });
+</script>
+</body>
+</html>

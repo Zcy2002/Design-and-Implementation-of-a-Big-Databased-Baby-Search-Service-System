@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:include="front/common/header::title"></head>
+</head>
+<body>
+<th:block th:replace="front/common/banner::banner"></th:block>
+
+<th:block th:replace="front/common/nav::nav"></th:block>
+
+<div class="container" style="max-width: 1100px; margin-top: 10px;">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="../../static/front/img/gx1.jpg" class="img-fluid" alt="Image 1">
+        </div>
+        <div class="col-md-6">
+            <img src="../../static/front/img/gx2.jpg" class="img-fluid" alt="Image 2">
+        </div>
+
+
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <img src="../../static/front/img/gx4.jpg" class="img-fluid" alt="Image 1">
+        </div>
+        <div class="col-md-6">
+            <img src="../../static/front/img/gx5.jpg" class="img-fluid" alt="Image 2">
+        </div>
+
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <img src="../../static/front/img/gx6.jpg" class="img-fluid" alt="Image 2">
+        </div>
+        <div class="col-md-6">
+            <img src="../../static/front/img/gx7.jpg" class="img-fluid" alt="Image 2">
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <img src="../../static/front/img/gx8.jpg" class="img-fluid" alt="Image 2">
+        </div>
+    </div>
+</div>
+</body>
+</html>

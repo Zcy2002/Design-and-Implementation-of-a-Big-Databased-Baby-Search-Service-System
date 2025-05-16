@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 导航栏 -->
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #1cbb9b !important; border-top: 3px solid #16a086; padding: 0;">
+    <div class="container" style="max-width: 1100px;">
+        <a class="navbar-brand navbar-brand bg-green-sea" th:href="@{/indexU}">
+<!--            <img src="../../static/front/img/01.jpg" alt="">-->
+            <img src="" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav d-flex w-100 justify-content-around">
+                <li class="nav-item flex-grow-1">
+                    <a class="nav-link" th:href="@{/view/front/familySearch}">寻亲登记</a>
+                </li>
+                <li class="nav-item flex-grow-1">
+                    <a class="nav-link" th:href="@{http://fa92182720.goho.co/}">信息匹配</a>
+                </li>
+                <li class="nav-item flex-grow-1">
+                    <a class="nav-link" th:href="@{/view/front/help}">紧急寻亲</a>
+                </li>
+                <li class="nav-item flex-grow-1">
+                    <a class="nav-link" th:href="@{/view/front/thank}">感谢区</a>
+                </li>
+                <li class="nav-item flex-grow-1">
+                    <a class="nav-link" th:href="@{/view/project/index}">可视化大屏</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+</body>
+</html>

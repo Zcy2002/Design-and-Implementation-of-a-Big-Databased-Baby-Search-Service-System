@@ -1,0 +1,20 @@
+{
+    "RECORDS": [
+        {
+            "category": "流浪乞讨",
+            "missing_count": "102"
+        },
+        {
+            "category": "家寻宝贝",
+            "missing_count": "4346"
+        },
+        {
+            "category": "其他寻人",
+            "missing_count": "1285"
+        },
+        {
+            "category": "宝贝寻家",
+            "missing_count": "37377"
+        }
+    ]
+}

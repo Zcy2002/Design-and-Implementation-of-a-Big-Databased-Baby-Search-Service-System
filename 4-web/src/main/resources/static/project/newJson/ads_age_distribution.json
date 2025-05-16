@@ -1,0 +1,391 @@
+{
+    "RECORDS": [
+        {
+            "missagestr": "未满一岁",
+            "missing_count": "29805"
+        },
+        {
+            "missagestr": "1岁",
+            "missing_count": "4183"
+        },
+        {
+            "missagestr": "2岁",
+            "missing_count": "1621"
+        },
+        {
+            "missagestr": "3岁",
+            "missing_count": "1473"
+        },
+        {
+            "missagestr": "4岁",
+            "missing_count": "1117"
+        },
+        {
+            "missagestr": "5岁",
+            "missing_count": "875"
+        },
+        {
+            "missagestr": "6岁",
+            "missing_count": "666"
+        },
+        {
+            "missagestr": "7岁",
+            "missing_count": "431"
+        },
+        {
+            "missagestr": "8岁",
+            "missing_count": "312"
+        },
+        {
+            "missagestr": "9岁",
+            "missing_count": "186"
+        },
+        {
+            "missagestr": "10岁",
+            "missing_count": "172"
+        },
+        {
+            "missagestr": "11岁",
+            "missing_count": "117"
+        },
+        {
+            "missagestr": "12岁",
+            "missing_count": "109"
+        },
+        {
+            "missagestr": "13岁",
+            "missing_count": "127"
+        },
+        {
+            "missagestr": "14岁",
+            "missing_count": "141"
+        },
+        {
+            "missagestr": "15岁",
+            "missing_count": "191"
+        },
+        {
+            "missagestr": "16岁",
+            "missing_count": "122"
+        },
+        {
+            "missagestr": "17岁",
+            "missing_count": "43"
+        },
+        {
+            "missagestr": "18岁",
+            "missing_count": "61"
+        },
+        {
+            "missagestr": "19岁",
+            "missing_count": "84"
+        },
+
+        {
+            "missagestr": "20岁",
+            "missing_count": "60"
+        },
+        {
+            "missagestr": "21岁",
+            "missing_count": "72"
+        },
+        {
+            "missagestr": "22岁",
+            "missing_count": "74"
+        },
+        {
+            "missagestr": "23岁",
+            "missing_count": "56"
+        },
+        {
+            "missagestr": "24岁",
+            "missing_count": "59"
+        },
+        {
+            "missagestr": "25岁",
+            "missing_count": "54"
+        },
+        {
+            "missagestr": "26岁",
+            "missing_count": "67"
+        },
+        {
+            "missagestr": "27岁",
+            "missing_count": "52"
+        },
+        {
+            "missagestr": "28岁",
+            "missing_count": "48"
+        },
+        {
+            "missagestr": "29岁",
+            "missing_count": "49"
+        },
+
+        {
+            "missagestr": "30岁",
+            "missing_count": "49"
+        },
+        {
+            "missagestr": "31岁",
+            "missing_count": "43"
+        },
+        {
+            "missagestr": "32岁",
+            "missing_count": "45"
+        },
+        {
+            "missagestr": "33岁",
+            "missing_count": "35"
+        },
+        {
+            "missagestr": "34岁",
+            "missing_count": "31"
+        },
+        {
+            "missagestr": "35岁",
+            "missing_count": "28"
+        },
+        {
+            "missagestr": "36岁",
+            "missing_count": "19"
+        },
+        {
+            "missagestr": "37岁",
+            "missing_count": "18"
+        },
+        {
+            "missagestr": "38岁",
+            "missing_count": "22"
+        },
+        {
+            "missagestr": "39岁",
+            "missing_count": "21"
+        },
+
+        {
+            "missagestr": "40岁",
+            "missing_count": "35"
+        },
+        {
+            "missagestr": "41岁",
+            "missing_count": "23"
+        },
+        {
+            "missagestr": "42岁",
+            "missing_count": "11"
+        },
+        {
+            "missagestr": "43岁",
+            "missing_count": "13"
+        },
+        {
+            "missagestr": "44岁",
+            "missing_count": "15"
+        },
+        {
+            "missagestr": "45岁",
+            "missing_count": "9"
+        },
+        {
+            "missagestr": "46岁",
+            "missing_count": "13"
+        },
+        {
+            "missagestr": "47岁",
+            "missing_count": "10"
+        },
+        {
+            "missagestr": "48岁",
+            "missing_count": "17"
+        },
+        {
+            "missagestr": "49岁",
+            "missing_count": "10"
+        },
+
+        {
+            "missagestr": "50岁",
+            "missing_count": "15"
+        },
+        {
+            "missagestr": "51岁",
+            "missing_count": "7"
+        },
+        {
+            "missagestr": "52岁",
+            "missing_count": "12"
+        },
+        {
+            "missagestr": "53岁",
+            "missing_count": "8"
+        },
+        {
+            "missagestr": "54岁",
+            "missing_count": "7"
+        },
+        {
+            "missagestr": "55岁",
+            "missing_count": "9"
+        },
+        {
+            "missagestr": "56岁",
+            "missing_count": "6"
+        },
+        {
+            "missagestr": "57岁",
+            "missing_count": "7"
+        },
+        {
+            "missagestr": "58岁",
+            "missing_count": "7"
+        },
+        {
+            "missagestr": "59岁",
+            "missing_count": "7"
+        },
+
+        {
+            "missagestr": "60岁",
+            "missing_count": "8"
+        },
+        {
+            "missagestr": "61岁",
+            "missing_count": "10"
+        },
+        {
+            "missagestr": "62岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "63岁",
+            "missing_count": "2"
+        },
+        {
+            "missagestr": "64岁",
+            "missing_count": "2"
+        },
+        {
+            "missagestr": "65岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "66岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "67岁",
+            "missing_count": "7"
+        },
+        {
+            "missagestr": "68岁",
+            "missing_count": "8"
+        },
+        {
+            "missagestr": "69岁",
+            "missing_count": "2"
+        },
+
+        {
+            "missagestr": "70岁",
+            "missing_count": "3"
+        },
+        {
+            "missagestr": "71岁",
+            "missing_count": "4"
+        },
+        {
+            "missagestr": "72岁",
+            "missing_count": "4"
+        },
+        {
+            "missagestr": "73岁",
+            "missing_count": "4"
+        },
+        {
+            "missagestr": "74岁",
+            "missing_count": "3"
+        },
+        {
+            "missagestr": "75岁",
+            "missing_count": "5"
+        },
+        {
+            "missagestr": "76岁",
+            "missing_count": "3"
+        },
+        {
+            "missagestr": "77岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "78岁",
+            "missing_count": "2"
+        },
+
+        {
+            "missagestr": "80岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "81岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "82岁",
+            "missing_count": "4"
+        },
+        {
+            "missagestr": "84岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "86岁",
+            "missing_count": "2"
+        },
+        {
+            "missagestr": "89岁",
+            "missing_count": "1"
+        },
+
+        {
+            "missagestr": "90岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "91岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "95岁",
+            "missing_count": "2"
+        },
+        {
+            "missagestr": "96岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "97岁",
+            "missing_count": "1"
+        },
+
+        {
+            "missagestr": "101岁",
+            "missing_count": "1"
+        },
+
+        {
+            "missagestr": "110岁",
+            "missing_count": "1"
+        },
+        {
+            "missagestr": "115岁",
+            "missing_count": "2"
+        },
+        {
+            "missagestr": "116岁",
+            "missing_count": "2"
+        }
+
+    ]
+}

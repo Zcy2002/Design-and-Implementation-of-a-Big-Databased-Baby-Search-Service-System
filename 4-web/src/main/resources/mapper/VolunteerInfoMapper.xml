@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iflytek.ylao.volunteer.dao.VolunteerInfoMapper">
+
+    <select id="listAll" resultType="VolunteerInfo">
+        select * from volunteer_info
+        <where>
+            <if test="user!=''">volunteer_name like concat("%",#{user},"%")</if>
+        </where>
+    </select>
+
+</mapper>

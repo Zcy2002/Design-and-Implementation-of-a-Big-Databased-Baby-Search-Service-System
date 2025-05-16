@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+  <title>数据可视化</title>
+  <link rel="stylesheet" th:href="@{/static/project/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/static/project/css/app.css}" />
+</head>
+
+<body class="bg01">
+  <header class="header">
+    <h3>数据可视化</h3>
+  </header>
+
+  <div class="wrapper">
+    <div class="container-fluid">
+      <div class="row fill-h">
+        <div class="col-lg-3 fill-h">
+          <div class="xpanel-wrapper xpanel-wrapper-3">
+            <div class="xpanel">
+              <div class="fill-h" id="guowai"></div>
+            </div>
+          </div>
+          <div class="xpanel-wrapper xpanel-wrapper-3">
+            <div class="xpanel">
+              <div class="fill-h" id="guonei"></div>
+            </div>
+          </div>
+          <div class="xpanel-wrapper xpanel-wrapper-3">
+            <div class="xpanel">
+              <div class="fill-h" id="top10"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 fill-h">
+          <div class="xpanel-wrapper xpanel-wrapper-1">
+            <div class="xpanel">
+              <!-- 地图散点 -->
+              <!-- <div id="box">
+                  <div style="width: 800px; height: 400px" id="meigui2"></div>
+                  <div style="width: 800px; height: 400px" id="meigui1"></div>
+                  <div style="width: 800px; height: 400px" id="meigui3"></div>
+                </div> -->
+              <div class="fill-h" id="scatterMap"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 fill-h">
+          <div class="xpanel-wrapper xpanel-wrapper-3" style="height: 50%;">
+            <div class="xpanel">
+              <div class="fill-h" style="display: none; width: 100%; height: 100%" id="meigui1"></div>
+              <div class="fill-h" id="sandian"></div>
+            </div>
+          </div>
+          <div class="xpanel-wrapper xpanel-wrapper-3" style="height: 50%;">
+            <div class="xpanel">
+              <!-- <div class="fill-h" style="display: none" id="meigui2"></div> -->
+              <div class="fill-h" id="bingtu"></div>
+            </div>
+          </div>
+          <div class="xpanel-wrapper xpanel-wrapper-3" style="display: none;">
+            <div class="xpanel">
+              <div class="fill-h" style="display: none" id="meigui3"></div>
+              <div class="fill-h" id="bar1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" th:src="@{/static/project/js/jquery-3.3.1.min.js}"></script>
+  <script type="text/javascript" th:src="@{/static/project/js/echarts-3.8.5.min.js}"></script>
+  <script type="text/javascript" th:src="@{/static/project/js/echarts-map-world.js}"></script>
+  <script type="text/javascript" th:src="@{/static/project/js/echarts-map-china.js}"></script>
+  <script type="text/javascript" th:src="@{/static/project/js/echarts-china-provinces/jiangsu.js}"></script>
+  <script type="text/javascript" th:src="@{/static/project/js/echarts-china-cities/jiang1_su1_su1_zhou1.js}"></script>
+  <script type="text/javascript" th:src="@{/static/project/js/echarts-china-counties/jiang1su1_su1zhou1_kun1shan1shi4.js}"></script>
+  <script type="text/javascript">
+    function bintu() {
+      var cSorNum = echarts.init(document.getElementById("bingtu"));
+
+      $.get("/static/project/newJson/ads_category_stats.json").done(function (data) {
+        let dataObj = [];
+        data.RECORDS.forEach(element => {
+          dataObj.push({
+            value: element.missing_count,
+            name: element.category,
+          });
+        });
+
+        //   var data = {
+        //     data: data1.RECORDS,
+        //   };
+        console.log(data);
+        cSorNum.setOption({
+          title: {
+            show: true,
+            text: "寻亲类别占比",
+            textStyle: {
+              //图例字体样式
+              color: "#fff",
+              fontSize: 14,
+              fontFamily: "微软雅黑",
+            },
+          },
+          tooltip: {
+            trigger: "item",
+            formatter: "{a} <br/>{b} : {c} ({d}%)",
+          },
+          legend: {
+            orient: "vertical", //图例的布局，水平布局、垂直布局
+            type: "scroll", //是否添加滚动页码
+            data: dataObj,
+            right: 0,
+            top: "middle",
+            icon: "circle",
+            itemWidth: 7, //图例宽度
+            itemHeight: 7, //图例高度
+            textStyle: {
+              //图例字体样式
+              color: "#fff",
+              fontSize: 12,
+              fontFamily: "微软雅黑",
+            },
+          },
+          grid: {
+            left: "0%",
+            right: "0%",
+            bottom: "0%",
+            containLabel: true,
+          },
+          series: [
+            {
+              name: "用户类型人数",
+              type: "pie",
+              radius: ["40%", "70%"],
+              center: ["44%", "50%"],
+              label: {
+                formatter: "{b}\n{a|{d}%}",
+                rich: {
+                  a: {
+                    padding: 6,
+                    align: "left",
+                    color: "#fff",
+                  },
+                },
+              },
+              data: dataObj,
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: "rgba(0, 0, 0, 0.1)",
+                },
+              },
+            },
+          ],
+          // })
+        });
+      });
+
+
+    }
+    function sandian() {
+      $.get("/static/project/newJson/ads_gender_age_top5.json").done(function (data) {
+        var pInterval = echarts.init(document.getElementById("sandian"));
+        let dataS = [];
+        let xAxisData = [];
+        let yAxisData = [];
+        data.RECORDS.forEach((element, index) => {
+          xAxisData.push(element.sex);
+          yAxisData.push(element.missagestr)
+          if (element.missagestr == "未满一岁") {
+            dataS.push([index, index, element.missing_count * 1])
+          } else {
+            dataS.push([index, index, element.missing_count * 1])
+          }
+
+        });
+
+        var option;
+        option = {
+          tooltip: {
+            position: 'top'
+          },
+          grid: {
+            height: '70%',
+            top: '10%',
+            left: '20%',
+
+          },
+          xAxis: {
+            type: 'category',
+            data: xAxisData,
+            splitArea: {
+              show: true,
+              color: "#fff",
+            },
+            axisLabel: {
+              show: true,
+              textStyle: {
+                color: "#fff",
+              },
+            },
+          },
+          yAxis: {
+            type: 'category',
+            data: yAxisData,
+            splitArea: {
+              show: true
+            },
+            axisLabel: {
+              show: true,
+              textStyle: {
+                color: "#fff",
+              },
+            },
+          },
+          visualMap: {
+            min: 0,
+            max: 20500,
+            calculable: true,
+            orient: 'horizontal',
+            left: 'center',
+            bottom: '1%'
+          },
+          series: [
+            {
+              name: 'Punch Card',
+              type: 'heatmap',
+              data: dataS,
+              label: {
+                show: true
+              },
+              emphasis: {
+                itemStyle: {
+                  shadowBlur: 20500,
+                  shadowColor: 'rgba(0, 0, 0, 0.1)'
+                }
+              }
+            }
+          ]
+        };
+
+        option && pInterval.setOption(option);
+
+      });
+    }
+
+    function guonei() {
+      $.get("/static/project/newJson/ads_decade_search_stats.json").done(function (data) {
+        var expLoc2 = echarts.init(document.getElementById("guonei"));
+
+        var arr = data.RECORDS;
+        var data = {
+          地点: arr.map((e) => {
+            return e.missdecadestr;
+          }),
+          人数: arr.map((e) => {
+            return e.search_count;
+          }),
+        };
+
+        expLoc2.setOption({
+          tooltip: {
+            trigger: "axis",
+          },
+          title: {
+            show: true,
+            text: "各年代走失人数折线图",
+            textStyle: {
+              //图例字体样式
+              color: "#fff",
+              fontSize: 14,
+              fontFamily: "微软雅黑",
+            },
+          },
+          legend: {
+            orient: "vertical", //图例的布局，水平布局、垂直布局
+            type: "scroll", //是否添加滚动页码
+            data: data.RECORDS,
+            right: 15,
+            top: "middle",
+            icon: "circle",
+            itemWidth: 8, //图例宽度
+            itemHeight: 8, //图例高度
+            textStyle: {
+              //图例字体样式
+              color: "#fff",
+              fontSize: 14,
+              fontFamily: "微软雅黑",
+            },
+          },
+          grid: {
+            left: "10",
+            right: "10",
+            bottom: "0",
+            top: "30",
+            containLabel: true,
+          },
+          barCategoryGap: "60%",
+          xAxis: [
+            {
+              type: "category",
+              data: data.地点,
+              axisPointer: {
+                type: "shadow",
+              },
+              splitLine: { lineStyle: { width: 0 } },
+              axisLabel: {
+                show: true,
+                textStyle: {
+                  color: "#fff",
+                },
+              },
+            },
+          ],
+          yAxis: [
+            {
+              type: "value",
+              name: "",
+              min: 0,
+              axisLabel: {
+                show: true,
+                textStyle: {
+                  color: "#fff",
+                },
+              },
+            },
+          ],
+          series: [
+            {
+              type: "line",
+              data: data.人数,
+            },
+          ],
+          // })
+        });
+      });
+    }
+
+    function bar1() {
+      $.get("/static/project/newJson/ads_gender_ratio.json").done(function (data) {
+        var expLoc = echarts.init(document.getElementById("top10"));
+
+        let dataV = [];
+        data.RECORDS.forEach(element => {
+          dataV.push({
+            name: element.sex,
+            value: element.missing_count
+          })
+        });
+        var option;
+
+        option = {
+          legend: {
+            top: 'bottom'
+          },
+
+          legend: {
+            orient: "vertical", //图例的布局，水平布局、垂直布局
+            type: "scroll", //是否添加滚动页码
+            data: dataV,
+            right: 5,
+            top: "20",
+            icon: "circle",
+            itemWidth: 6, //图例宽度
+            itemHeight: 6, //图例高度
+            textStyle: {
+              //图例字体样式
+              color: "#fff",
+              fontSize: 16,
+              fontFamily: "微软雅黑",
+            },
+          },
+          tooltip: {
+            trigger: "item",
+            formatter: "{a} <br/>{b} : {c} ({d}%)",
+          },
+          grid: {
+            left: "10",
+            right: "0",
+            bottom: "0",
+            top: "10",
+            containLabel: true,
+          },
+          barCategoryGap: "60%",
+          title: {
+            show: true,
+            text: "性别分布图",
+            textStyle: {
+              //图例字体样式
+              color: "#fff",
+              fontSize: 14,
+              fontFamily: "微软雅黑",
+            },
+          },
+          series: [
+            {
+              name: '具体情况',
+              type: 'pie',
+              radius: ["40%", "70%"],
+              center: ["50%", "50%"],
+              roseType: 'area',
+              itemStyle: {
+                borderRadius: 6
+              },
+              data: dataV
+            }
+          ]
+        };
+
+        option && expLoc.setOption(option);
+
+
+        return false;
+
+        var arr = data.RECORDS;
+        var data = {
+          地点: arr.map((e) => {
+            return e.hour + ":00";
+          }),
+          人数: arr.map((e) => {
+            return e.stu_count;
+          }),
+        };
+
+        expLoc.setOption({
+          title: {
+            show: true,
+            text: "24小时用户登录情况",
+            textStyle: {
+              //图例字体样式
+              color: "#fff",
+              fontSize: 14,
+              fontFamily: "微软雅黑",
+            },
+          },
+          legend: {
+            orient: "vertical", //图例的布局，水平布局、垂直布局
+            type: "scroll", //是否添加滚动页码
+            data: data.RECORDS,
+            right: 15,
+            top: "middle",
+            icon: "circle",
+            itemWidth: 8, //图例宽度
+            itemHeight: 8, //图例高度
+            textStyle: {
+              //图例字体样式
+              color: "#fff",
+              fontSize: 14,
+              fontFamily: "微软雅黑",
+            },
+          },
+          tooltip: {
+            trigger: "axis",
+          },
+          grid: {
+            left: "10",
+            right: "5",
+            bottom: "0",
+            top: "30",
+            containLabel: true,
+          },
+          barCategoryGap: "60%",
+          xAxis: [
+            {
+              type: "category",
+              data: data.地点,
+              axisPointer: {
+                type: "shadow",
+              },
+              splitLine: { lineStyle: { width: 0 } },
+              axisLabel: {
+                show: true,
+                textStyle: {
+                  color: "#fff",
+                },
+              },
+            },
+          ],
+          yAxis: [
+            {
+              type: "value",
+              name: "",
+              min: 0,
+              axisLabel: {
+                show: true,
+                textStyle: {
+                  color: "#fff",
+                },
+              },
+            },
+          ],
+          series: [
+            {
+              type: "bar",
+              data: data.人数,
+            },
+          ],
+          // })
+        });
+      });
+    }
+
+    function guowai() {
+      $.get("/static/project/newJson/ads_age_distribution.json").done(function (data) {
+        var expLoc = echarts.init(document.getElementById("guowai"));
+
+        var arr = data.RECORDS;
+        var data = {
+          地点: arr.map((e) => {
+            return e.missagestr;
+          }),
+          人数: arr.map((e) => {
+            return e.missing_count;
+          }),
+        };
+
+        expLoc.setOption({
+          title: {
+            show: true,
+            text: "年龄分布条形图",
+            textStyle: {
+              //图例字体样式
+              color: "#fff",
+              fontSize: 14,
+              fontFamily: "微软雅黑",
+            },
+          },
+          tooltip: {
+            trigger: "axis",
+          },
+          grid: {
+            left: "10",
+            right: "10",
+            bottom: "0",
+            top: "30",
+            containLabel: true,
+          },
+          barCategoryGap: "60%",
+          xAxis: [
+            {
+              type: "category",
+              data: data.地点,
+              axisPointer: {
+                type: "shadow",
+              },
+              splitLine: { lineStyle: { width: 0 } },
+              axisLabel: {
+                show: true,
+                textStyle: {
+                  color: "#fff",
+                },
+              },
+            },
+          ],
+          yAxis: [
+            {
+              type: "value",
+              name: "",
+              min: 0,
+              axisLabel: {
+                show: true,
+                textStyle: {
+                  color: "#fff",
+                },
+              },
+            },
+          ],
+          series: [
+            {
+              type: "bar",
+              data: data.人数,
+            },
+          ],
+          // })
+        });
+      });
+    }
+
+    function data3() {
+      var chart = echarts.init(document.getElementById("meigui1"));
+      chart.setOption({
+        title: {
+          // text: '南丁格尔玫瑰图',
+          // subtext: '耶！',
+          left: "center",
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)", // <br/>换行
+          //a:（系列名称） b:(数据名称) c:(数值) d:(饼图百分比)
+        },
+        legend: {
+          //图列名称
+          left: "center",
+          top: "bottom",
+          data: [
+            "rose1",
+            "rose2",
+            "rose3",
+            "rose4",
+            "rose5",
+            "rose6",
+            "rose7",
+            "rose8",
+          ],
+        },
+        toolbox: {
+          //工具栏
+          show: true, //是否显示
+          feature: {
+            //各工具配置项
+            mark: { show: true },
+            dataView: { show: true, readOnly: false }, //数据视图，可以展现当前图表数据，还可以动态修改更新
+            restore: { show: true }, //配置项还原
+            saveAsImage: { show: true }, //保存为图片
+          },
+        },
+        series: [
+          {
+            name: "面积模式",
+            type: "pie",
+            radius: [10, 50],
+            center: ["50%", "50%"],
+            roseType: "area", //所有圆心角相同，仅通过半径展示数据大小
+            itemStyle: {
+              borderRadius: "100%", //内圆半径和外圆半径
+            },
+            data: [
+              {
+                name: "三门峡",
+                value: "420",
+              },
+              {
+                name: "信阳",
+                value: "981",
+              },
+              {
+                name: "南阳",
+                value: "1428",
+              },
+              {
+                name: "周口",
+                value: "2508",
+              },
+              {
+                name: "商丘",
+                value: "1338",
+              },
+              {
+                name: "安阳",
+                value: "553",
+              },
+              {
+                name: "平顶山",
+                value: "553",
+              },
+              {
+                name: "开封",
+                value: "732",
+              },
+              {
+                name: "鹤壁",
+                value: "127",
+              },
+              {
+                name: "洛阳",
+                value: "1142",
+              },
+              {
+                name: "济源",
+                value: "52",
+              },
+              {
+                name: "漯河",
+                value: "327",
+              },
+              {
+                name: "濮阳",
+                value: "659",
+              },
+              {
+                name: "焦作",
+                value: "960",
+              },
+              {
+                name: "许昌",
+                value: "805",
+              },
+              {
+                name: "郑州",
+                value: "2465",
+              },
+              {
+                name: "驻马店",
+                value: "1321",
+              },
+              {
+                name: "新乡",
+                value: "454",
+              },
+            ],
+          },
+        ],
+      });
+    }
+    function data1() {
+      var chart = echarts.init(document.getElementById("meigui1"));
+      console.log(chart);
+      chart.setOption({
+        title: {
+          // text: '南丁格尔玫瑰图',
+          // subtext: '耶！',
+          left: "center",
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)", // <br/>换行
+          //a:（系列名称） b:(数据名称) c:(数值) d:(饼图百分比)
+        },
+        legend: {
+          //图列名称
+          left: "center",
+          top: "bottom",
+          data: [
+            "rose1",
+            "rose2",
+            "rose3",
+            "rose4",
+            "rose5",
+            "rose6",
+            "rose7",
+            "rose8",
+          ],
+        },
+        toolbox: {
+          //工具栏
+          show: true, //是否显示
+          feature: {
+            //各工具配置项
+            mark: { show: true },
+            dataView: { show: true, readOnly: false }, //数据视图，可以展现当前图表数据，还可以动态修改更新
+            restore: { show: true }, //配置项还原
+            saveAsImage: { show: true }, //保存为图片
+          },
+        },
+        series: [
+          {
+            name: "面积模式",
+            type: "pie",
+            radius: [10, 50],
+            center: ["50%", "50%"],
+            roseType: "area", //所有圆心角相同，仅通过半径展示数据大小
+            itemStyle: {
+              borderRadius: "100%", //内圆半径和外圆半径
+            },
+            data: [
+              {
+                name: "六盘水",
+                value: "719",
+              },
+              {
+                name: "安顺",
+                value: "497",
+              },
+              {
+                name: "毕节",
+                value: "1503",
+              },
+              {
+                name: "黔东南苗族侗族自治州",
+                value: "905",
+              },
+              {
+                name: "黔南布依族苗族自治州",
+                value: "1418",
+              },
+              {
+                name: "黔西南布依族苗族自治州",
+                value: "550",
+              },
+
+              {
+                name: "贵阳",
+                value: "3603",
+              },
+              {
+                name: "遵义",
+                value: "2388",
+              },
+              {
+                name: "铜仁",
+                value: "902",
+              },
+            ],
+          },
+        ],
+      });
+    }
+    function data4() {
+      var chart = echarts.init(document.getElementById("meigui1"));
+      chart.setOption({
+        title: {
+          // text: '南丁格尔玫瑰图',
+          // subtext: '耶！',
+          left: "center",
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)", // <br/>换行
+          //a:（系列名称） b:(数据名称) c:(数值) d:(饼图百分比)
+        },
+        legend: {
+          //图列名称
+          left: "center",
+          top: "bottom",
+          data: [
+            "rose1",
+            "rose2",
+            "rose3",
+            "rose4",
+            "rose5",
+            "rose6",
+            "rose7",
+            "rose8",
+          ],
+        },
+        toolbox: {
+          //工具栏
+          show: true, //是否显示
+          feature: {
+            //各工具配置项
+            mark: { show: true },
+            dataView: { show: true, readOnly: false }, //数据视图，可以展现当前图表数据，还可以动态修改更新
+            restore: { show: true }, //配置项还原
+            saveAsImage: { show: true }, //保存为图片
+          },
+        },
+        series: [
+          {
+            name: "面积模式",
+            type: "pie",
+            radius: [10, 50],
+            center: ["50%", "50%"],
+            roseType: "area", //所有圆心角相同，仅通过半径展示数据大小
+            itemStyle: {
+              borderRadius: "100%", //内圆半径和外圆半径
+            },
+            data: [
+              {
+                name: "仙桃",
+                value: "391",
+              },
+              {
+                name: "十堰",
+                value: "1005",
+              },
+              {
+                name: "咸宁",
+                value: "942",
+              },
+              {
+                name: "天门",
+                value: "618",
+              },
+              {
+                name: "孝感",
+                value: "1733",
+              },
+              {
+                name: "宜昌",
+                value: "796",
+              },
+              {
+                name: "恩施土家族苗族自治州",
+                value: "821",
+              },
+              {
+                name: "武汉",
+                value: "6534",
+              },
+              {
+                name: "潜江",
+                value: "218",
+              },
+              {
+                name: "神农架林区",
+                value: "37",
+              },
+              {
+                name: "荆州",
+                value: "2038",
+              },
+              {
+                name: "荆门",
+                value: "1693",
+              },
+              {
+                name: "襄阳",
+                value: "2359",
+              },
+              {
+                name: "鄂州",
+                value: "477",
+              },
+              {
+                name: "随州",
+                value: "1203",
+              },
+              {
+                name: "黄冈",
+                value: "2935",
+              },
+              {
+                name: "黄石",
+                value: "833",
+              },
+            ],
+          },
+        ],
+      });
+    }
+
+    $(function () {
+      // data1();
+      bar1();
+      guowai();
+      guonei();
+      sandian();
+      bintu();
+      // top10();
+      /***************** 地图散点 ******************/
+      //初始化echarts实例
+      const scatterMap = echarts.init(document.getElementById("scatterMap"));
+      //城市经纬度
+      const scatterGeo = {
+        广东省: [113.266531, 23.132191],
+        湖北省: [114.341745, 30.546557],
+        河南省: [113.625368, 34.7466],
+        山东省: [117.019915, 36.671156],
+        重庆省: [106.551557, 29.56301],
+        河北省: [114.530235, 38.037433],
+        贵州省: [106.713478, 26.578343],
+        浙江省: [120.153576, 30.287459],
+        四川省: [104.075809, 30.651239],
+        广西壮族自治区: [108.327546, 22.815478],
+        江苏省: [119.368488, 33.013797],
+        湖南省: [112.98381, 28.112444],
+        陕西省: [108.954239, 34.265472],
+        山西省: [112.562678, 37.873499],
+        安徽省: [117.329949, 31.733806],
+        福建省: [119.296494, 26.074508],
+        上海市: [121.469265, 31.238068],
+        江西省: [115.81635, 28.63666],
+        北京市: [116.407526, 39.90403],
+        黑龙江省: [128.047414, 47.356592],
+        云南省: [102.710002, 25.045806],
+        甘肃省: [103.823557, 36.058039],
+        辽宁省: [123.431382, 41.836175],
+        天津市: [117.200983, 39.084158],
+        吉林省: [126.549572, 43.837883],
+        海南省: [110.349228, 20.017377],
+        内蒙古自治区: [111.76629, 40.81739],
+        宁夏回族自治区: [106.238976, 38.492392],
+        新疆维吾尔自治区: [87.617733, 43.792818],
+        香港: [114.173355, 22.320048],
+        青海省: [101.779, 36.6232],
+        西藏自治区: [91.11, 29.97],
+        台湾省: [121.1803, 23.4525],
+        重庆市: [106.33, 29.35]
+      };
+      //城市数据
+      $.get("/static/project/newJson/ads_province_stats.json").done(function (data) {
+        const scatterVal = data.RECORDS;
+        let dataC = [];
+        data.RECORDS.forEach(element => {
+          dataC.push({
+            name: element.locationprovince,
+            value: element.search_count
+          })
+        });
+        console.log(dataC)
+        console.log('----------')
+        //数据转换，转换后的格式：[{name: 'cityName', value: [lng, lat, val]}, {...}]
+        const convertScatterData = function (data) {
+          let res = [];
+          for (let i = 0; i < data.length; i++) {
+            let geoCoord = scatterGeo[data[i].name];
+            console.log("geoCoord", geoCoord)
+            if (geoCoord) {
+              res.push({
+                name: data[i].name,
+                value: geoCoord.concat(data[i].value),
+              });
+            }
+          }
+          return res;
+        };
+        //地图配置项
+        const sactterMapOpt = {
+          title: {
+            text: "全国主要城市人数",
+            x: "center",
+            textStyle: {
+              color: "#fff",
+            },
+          },
+
+          tooltip: {
+            trigger: "item",
+            formatter: function (params) {
+              return params.name + " : " + params.value[2];
+            },
+          },
+
+          geo: {
+            map: "china",
+            roam: false, //开启鼠标缩放和漫游
+            zoom: 1, //地图缩放级别
+            selectedMode: false, //选中模式：single | multiple
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            layoutCenter: ["50%", "50%"], //设置后left/right/top/bottom等属性无效
+            layoutSize: "100%",
+            label: {
+              emphasis: {
+                show: false,
+              },
+            },
+            itemStyle: {
+              normal: {
+                areaColor: "#101f32",
+                borderWidth: 1.1,
+                borderColor: "#43d0d6",
+              },
+              emphasis: {
+                areaColor: "#069",
+              },
+            },
+          },
+          series: [
+            {
+              name: "PM2.5",
+              type: "scatter",
+              coordinateSystem: "geo",
+              symbolSize: 12,
+              label: {
+                normal: {
+                  show: false,
+                },
+                emphasis: {
+                  show: false,
+                },
+              },
+              itemStyle: {
+                emphasis: {
+                  borderColor: "#fff",
+                  borderWidth: 1,
+                },
+              },
+              data: convertScatterData(dataC),
+            },
+          ],
+        };
+
+        //渲染报表
+        scatterMap.setOption(sactterMapOpt);
+        scatterMap.on("click", (params) => {
+          if (params.data.name == "湖北") {
+            document.getElementById("sandian").style.display = "none";
+            document.getElementById("meigui1").style.display = "block";
+            data4();
+          }
+          if (params.data.name == "贵州") {
+            document.getElementById("sandian").style.display = "none";
+            document.getElementById("meigui1").style.display = "block";
+            data1();
+          }
+          if (params.data.name == "河南") {
+            document.getElementById("sandian").style.display = "none";
+            document.getElementById("meigui1").style.display = "block";
+            data3();
+          }
+        });
+      });
+
+      /********** 浏览器窗口改变时，重置报表大小 ****************/
+      window.onresize = function () {
+        //   flyMap.resize();
+        scatterMap.resize();
+        worldMap.resize();
+        provinceMap.resize();
+        cityMap.resize();
+        countyMap.resize();
+      };
+    });
+  </script>
+</body>
+
+</html>

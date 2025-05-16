@@ -1,0 +1,12 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "view/welcome"
+  },
+  "logoInfo": {
+    "title": "宝贝寻亲数据可视化展示",
+    "image": "static/images/lg.png",
+    "href": ""
+  },
+  "menuInfo": []
+}
