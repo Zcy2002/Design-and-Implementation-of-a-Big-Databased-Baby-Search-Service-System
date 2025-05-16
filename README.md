@@ -34,18 +34,18 @@
 - 平台数据监控与后台管理
 
 技术架构
-前端
-HTML + CSS + JavaScript + ECharts
-后端
-Spring Boot
-数据库
-MySQL
-大数据组件
-Hadoop、Hive（用于存储与分析大规模寻亲数据）
-可视化
-ECharts 实现数据展示大屏
-开发工具
-IDEA、Navicat、Hadoop环境
+
+前端 HTML + CSS + JavaScript + ECharts
+
+后端 Spring Boot
+
+数据库 MySQL
+
+大数据组件 Hadoop、Hive（用于存储与分析大规模寻亲数据）
+
+可视化 ECharts 实现数据展示大屏
+
+开发工具IDEA、Navicat、Hadoop环境
 
 项目结构
 
